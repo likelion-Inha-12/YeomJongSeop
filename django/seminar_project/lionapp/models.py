@@ -32,8 +32,8 @@ class UserPost(models.Model):
     user = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='liked_posts')  # '좋아요'를 누른 사용자
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likers')  # '좋아요'를 받은 포스트
 
-    # class UserPost:
-    #     unique_together = ('user', 'post')  # 유저와 포스트의 조합은 유니크해야 함
+    class UserPost:
+        unique_together = ('user', 'post')  # 유저와 포스트의 조합은 유니크해야 함
 
-    # def __str__(self):
-    #     return f"{self.user.name} likes {self.post.title}"
+    def __str__(self):
+        return f"{self.user.name} likes {self.post.title}"

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'member',
     'util',
     'lionapp',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
