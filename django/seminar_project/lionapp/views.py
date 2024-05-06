@@ -1,19 +1,24 @@
 
 import json
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from .models import *
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
-from rest_framework.decorators import api_view
+
 
 from rest_framework import status
 from django.http import JsonResponse, HttpResponse
-from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView,View
+from rest_framework.decorators import api_view
 from .serializers import PostSerializer
 
 
+def api_response(data, message, status):
+    response = {
+        "message":message,
+        "data":data
+    }
+    return Response(response, status=status)
 
 def create_post(request):
     if request.method == 'POST':
@@ -49,7 +54,7 @@ def delete_post(request, pk):
         }
         return JsonResponse(data, status=200)
     return JsonResponse({'message':'DELETE 요청만 허용됩니다.'})
-    return JsonResponse({'message':'DELETE 요청만 허용됩니다.'})
+
 
 
 
@@ -68,28 +73,25 @@ def create_post_v2(request):
     post.save()
 
     message = f"id: {post.pk}번 포스트 생성 성공"
-    return Response(data = None, message = message, status = status.HTTP_201_CREATED)
+    return api_response(data=None, message=message, status=status.HTTP_201_CREATED)
 
 class PostApiView(APIView):
 
     def get_object(self, pk):
         post = get_object_or_404(Post, pk=pk)
         return post
+    
     def get(self, request, pk):
         post = self.get_object(pk)
-
         postSerializer = PostSerializer(post)
         message = f"id: {post.pk}번 포스트 조회 성공"
-        return Response(data = postSerializer.data, message = message, status = status.HTTP_200_OK)
-
+        return api_response(data=postSerializer.data, message=message, status=status.HTTP_200_OK)
+        
     def delete(self, request, pk):
         post = self.get_object(pk)
         post.delete()
-
-        
         message = f"id: {pk}번 포스트 삭제 성공"
-        return Response(message = message, status = status.HTTP_200_OK) 
-    
+        return api_response(message=message, status=status.HTTP_200_OK)
 
 
 class LikePostView(View):
@@ -120,3 +122,6 @@ class PostListByCommentCountView(View):
         post_list = [str(post) for post in posts]
 
         return JsonResponse({'post_list': post_list})
+    
+
+    

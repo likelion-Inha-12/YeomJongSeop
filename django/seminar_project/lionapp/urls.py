@@ -7,9 +7,9 @@ from lionapp import views
 urlpatterns = [
     path('create/', views.create_post),
     path('<int:pk>/', views.get_post),
-    path('like_post/', LikePostView.as_view()),
-    path('post_like_count/', PostLikeCountView.as_view()),
-    path('post_list_by_comment_count/', PostListByCommentCountView.as_view()),
+    path('like_post/', views.LikePostView.as_view()),
+    path('post_like_count/', views.PostLikeCountView.as_view()),
+    path('post_list_by_comment_count/', views.PostListByCommentCountView.as_view()),
     path('delete/<int:pk>/', views.delete_post),
     path('comments/<int:post_id>',views.get_comment),
     path('v2/post/<int:pk>',views.PostApiView.as_view()),
