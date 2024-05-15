@@ -59,7 +59,7 @@ ROOT_URLCONF = 'seminar_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')], # 템플릿 경로 추가
+        'DIRS': [os.path.join(BASE_DIR, 'seminar_project', 'templates')], # 템플릿 경로 추가
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
