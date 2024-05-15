@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
 
-from util import views
-from lionapp import views
-from member import views
+from util import views as util_views
+from lionapp import views as lion_views
+from member import views as member_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
