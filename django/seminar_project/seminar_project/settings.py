@@ -26,7 +26,7 @@ SECRET_KEY = '#o!c011lbqk405tr)p%)i*yn7nr4#w-a2br@p9%fpmibyt_&^('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] #배포를 위해 추가
 
 
 # Application definition
