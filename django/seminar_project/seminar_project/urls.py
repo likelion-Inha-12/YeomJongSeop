@@ -10,4 +10,5 @@ urlpatterns = [
     path('health/', include('util.urls')), 
     path('lion/', include('lionapp.urls')),
     path('member/', include('member.urls')),
+    path('', util_views.home, name='home'),  # 기본 경로 추가
 ]

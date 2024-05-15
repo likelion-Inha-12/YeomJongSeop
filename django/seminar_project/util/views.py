@@ -14,3 +14,7 @@ def api_response(data, message, status):
         "data":data
     }
     return Response(response, status=status)
+
+
+def home(request):
+    return render(request, 'home.html')
