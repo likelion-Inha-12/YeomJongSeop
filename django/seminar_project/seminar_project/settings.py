@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*'] #배포를 위해 추가
 INSTALLED_APPS = [
     'member',
     'util',
+    'users', # 추가
     'lionapp',
     'corsheaders',
     'rest_framework',
