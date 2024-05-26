@@ -1,18 +1,23 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
-
+from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
-
     class Meta:
-        model = get_user_model()
-        fields = ('id', 'email', 'password', 'name')
+        model = User
+        fields = ['ID', 'email', 'name', 'password', 'generation', 'gender']
+        extra_kwargs = {'password': {'write_only': True}}
 
-# 패스워드가 필요없는 다른 테이블에서 사용할 용도
-class UserInfoSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = get_user_model()
-        fields = ('id', 'email', 'name')
+    def create(self, validated_data):
+        if User.objects.filter(ID=validated_data['ID']).exists():
+            raise serializers.ValidationError("ID already exists.")
+        
+        user = User(
+            email=validated_data['email'],
+            ID=validated_data['ID'],
+            name=validated_data['name'],
+            generation=validated_data.get('generation'),
+            gender=validated_data.get('gender')
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user

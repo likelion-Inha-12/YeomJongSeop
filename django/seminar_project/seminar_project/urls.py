@@ -11,4 +11,5 @@ urlpatterns = [
     path('lion/', include('lionapp.urls')),
     path('member/', include('member.urls')),
     path('', util_views.home, name='home'),  # 기본 경로 추가
+    path('users/', include('users.urls'))
 ]

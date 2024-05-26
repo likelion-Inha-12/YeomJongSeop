@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'member',
     'util',
     'lionapp',
+    'users', # 추가
     'corsheaders',
     'rest_framework',
     'django.contrib.admin',
@@ -155,3 +156,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    'USER_ID_FIELD': 'ID',
+    'USER_ID_CLAIM': 'user_id',
+}
