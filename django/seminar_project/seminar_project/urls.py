@@ -32,6 +32,8 @@ urlpatterns = [
     path('lion/', include('lionapp.urls')),
     path('member/', include('member.urls')),
     path('users/', include('users.urls')),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     #path('', views.index, name='index'),
     #path('', util_views.home, name='home'),  # 기본 경로 추가
     # Swagger url
