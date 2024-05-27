@@ -9,9 +9,23 @@ from rest_framework import status
 from django.http import JsonResponse, HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView,View
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view # 중요 api 데코레이터
 from .serializers import PostSerializer
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework.decorators import authentication_classes
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
+@swagger_auto_schema(
+        method="POST", 
+        tags=["첫번째 view"],
+        operation_summary="post 생성", 
+        operation_description="post를 생성합니다.",
+        responses={
+            201: '201에 대한 설명', 
+            400: '400에 대한 설명',
+            500: '500에 대한 설명'
+        }
+)
 
 def api_response(data, message, status):
     response = {
@@ -64,6 +78,16 @@ def get_comment(request, post_id):
         comment_list = post.comments.all()
         return HttpResponse(comment_list, status=200)
     
+
+
+# @api_view(['GET', 'POST'])
+# def index(request):
+# 	if request.method == 'POST':
+#     	return HttpResponse("Post method")
+#     else:
+#     	return HttpResponse("Get method")
+     
+@authentication_classes([JWTAuthentication])
 @api_view(['POST'])
 def create_post_v2(request):
     post = Post(

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'users', # 추가
     'lionapp',
     'corsheaders',
+    'drf_yasg', # 추가
     'rest_framework',
     'rest_framework_simplejwt', # 추가
     'django.contrib.admin',
@@ -94,6 +95,20 @@ SIMPLE_JWT = {
 }
 # JWT 설정으로, JSON Web Token의 특정 속성을 설정합니다.
 
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        'BearerAuth': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': "JWT Token"
+        }
+    },
+    'SECURITY_REQUIREMENTS': [{
+        'BearerAuth': []
+    }]
+}
 
 CORS_ALLOW_METHODS = [  # 허용할 옵션
     'DELETE',
@@ -199,6 +214,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # 정적 파일(사진 같은..)의 URL을 설정합니다.
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 기본 자동 생성 필드를 생성합니다.
