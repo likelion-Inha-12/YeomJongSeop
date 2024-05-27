@@ -26,7 +26,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
             500: '500에 대한 설명'
         }
 )
-
+@api_view(['GET', 'POST'])  # methods 인자를 추가하여 올바르게 사용
 def api_response(data, message, status):
     response = {
         "message":message,
